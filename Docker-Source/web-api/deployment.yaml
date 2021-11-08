@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: backend
-        image: backend
+        image: cccontainerregistry1.azurecr.io/backend/backend:latest
         ports:
         - containerPort: 9999
         resources:
