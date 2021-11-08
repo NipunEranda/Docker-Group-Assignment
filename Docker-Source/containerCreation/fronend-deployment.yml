@@ -6,19 +6,21 @@ spec:
   selector:
     matchLabels:
       app: frontend
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
         app: frontend
     spec:
+      imagePullSecrets:
+        - name: acr-secret
       containers:
-      - name: frontend
-        image: cccontainerregistry1.azurecr.io/frontend:latest
-        ports:
-        - containerPort: 80
-        resources:
-          limits:
-            cpu: 500m
-          requests:
-            cpu: 200m
+        - name: frontend
+          image: cccontainerregistry1.azurecr.io/frontend:latest
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
