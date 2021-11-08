@@ -1,0 +1,92 @@
+#!/bin/bash
+#login to azure
+az login
+
+#create a service principle
+#az ad sp create-for-rbac --skip-assignment --name ccClusterServicePrincipal
+
+#copy content to a file
+#create a resource group
+az group create --name CC-Group --location eastus
+
+#create aks cluster
+az aks create \
+  --resource-group CC-Group \
+  --name cc-cluster \
+  --node-count 1 \
+  --vm-set-type VirtualMachineScaleSets \
+  --load-balancer-sku standard \
+  --enable-cluster-autoscaler \
+  --min-count 1 \
+  --max-count 3 \
+  --enable-addons monitoring \
+  --generate-ssh-keys
+
+#install kubectl
+az aks install-cli
+
+az aks get-credentials --resource-group CC-Group-Resources --name cc-cluster
+
+#create container registry
+az acr create --resource-group CC-Group-Resources \
+  --name ccContainerRegistry1 --sku Basic
+
+#login to docker
+sudo docker login ccContainerRegistry1.azurecr.io
+
+#retag containers using the container registry name
+sudo docker tag backend:latest ccContainerRegistry1.azurecr.io/backend:v1
+sudo docker tag frontend:latest ccContainerRegistry1.azurecr.io/frontend:v1
+sudo docker tag mysql:latest ccContainerRegistry1.azurecr.io/mysql:v1
+
+sudo docker push ccContainerRegistry1.azurecr.io/backend:v1
+sudo docker push ccContainerRegistry1.azurecr.io/frontend:v1
+sudo docker push ccContainerRegistry1.azurecr.io/mysql:v1
+
+#terraform
+
+SUBSCRIPTION_ID=5cdec30a-3c78-4458-9e5b-75ad003e133c \
+
+az ad sp create-for-rbac \
+  --role="Contributor" \
+  --scopes="/subscriptions/$SUBSCRIPTION_ID"
+
+#{
+#  "appId": "0c2f4e50-746a-4535-b368-cae13522a34b",
+#  "displayName": "azure-cli-2021-11-08-08-49-27",
+#  "name": "0c2f4e50-746a-4535-b368-cae13522a34b",
+#  "password": "q0yg-Hknd4yPUtTn.6y.3e_Gp7gKqeJ0un",
+#  "tenant": "44e3cf94-19c9-4e32-96c3-14f5bf01391a"
+#}
+
+export ARM_CLIENT_ID=0c2f4e50-746a-4535-b368-cae13522a34b
+export ARM_SUBSCRIPTION_ID=5cdec30a-3c78-4458-9e5b-75ad003e133c
+export ARM_TENANT_ID=44e3cf94-19c9-4e32-96c3-14f5bf01391a
+export ARM_CLIENT_SECRET=q0yg-Hknd4yPUtTn.6y.3e_Gp7gKqeJ0un
+
+#inside the terraform folder
+
+terraform init
+terraform plan
+terraform apply
+
+mv kubeconfig ~/.kube/config
+
+minikube start
+
+minikube docker-env \
+export DOCKER_TLS_VERIFY=”1" \
+export DOCKER_HOST=”tcp://172.17.0.2:2376" \
+export DOCKER_CERT_PATH=”/home/user/.minikube/certs” \
+export MINIKUBE_ACTIVE_DOCKERD=”minikube”
+
+eval $(minikube -p minikube docker-env)
+
+./deployFrontend
+./deployBackend
+./deployDB
+
+
+kubectl create -f frontend/deployment.yaml
+kubectl create -f backend/deployment.yaml
+kubectl create -f DB/deployment.yaml

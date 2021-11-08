@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="css/home.css" rel="stylesheet">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery-1.11.1.min.js"></script>
+    <script src="js/controller.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    <title>Home</title>
+</head>
+
+<body>
+
+    <div class="card-container">
+        <img id="profileImage" class="round" src="" alt="user" />
+        <h3 id="fullName"></h3>
+        <div class="table-responsive-sm">
+            <table class="table table-dark table-hover">
+                <tr>
+                    <td>User ID : </td>
+                    <td id="userId"></td>
+                </tr>
+                <tr>
+                    <td>DOB :</td>
+                    <td id="dob"></td>
+                </tr>
+                <tr>
+                    <td>Address : </td>
+                    <td id="address"></td>
+                </tr>
+                <tr>
+                    <td>Gender : </td>
+                    <td id="gender"></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="skills">
+            <h6>Contact</h6>
+            <div class="table-responsive-sm">
+                <table class="table table-dark table-hover">
+                    <tr>
+                        <td>Email: </td>
+                        <td id="email"></td>
+                    </tr>
+                    <tr>
+                        <td>Mobile: </td>
+                        <td id="phoneNo"></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <button onclick="logout();" class="btn btn-danger logoutBtn">Logout</button>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            const loggedUser = JSON.parse(sessionStorage.getItem("loggedUser"));
+            getUserDetails(loggedUser.userId);
+        });
+    </script>
+</body>
+
+</html>

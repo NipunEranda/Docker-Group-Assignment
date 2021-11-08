@@ -1,0 +1,22 @@
+{
+    "appId": "6b0fe252-a141-4c2b-ad34-eed4e76ffb30",
+    "displayName": "ccClusterServicePrincipal",
+    "name": "6b0fe252-a141-4c2b-ad34-eed4e76ffb30",
+    "password": "H4By92p-qPSkJl_PMM.SCOZjJU8ecr_ety",
+    "tenant": "44e3cf94-19c9-4e32-96c3-14f5bf01391a"
+}
+
+{
+    "environmentName": "AzureCloud",
+    "homeTenantId": "44e3cf94-19c9-4e32-96c3-14f5bf01391a",
+    "id": "5cdec30a-3c78-4458-9e5b-75ad003e133c",
+    "isDefault": true,
+    "managedByTenants": [],
+    "name": "Azure subscription 1",
+    "state": "Enabled",
+    "tenantId": "44e3cf94-19c9-4e32-96c3-14f5bf01391a",
+    "user": {
+        "name": "it18009446@my.sliit.lk",
+        "type": "user"
+    }
+}

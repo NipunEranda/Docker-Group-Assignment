@@ -1,0 +1,13 @@
+#!/bin/bash
+
+minikube start \
+  --memory 4096 \
+  --extra-config=controller-manager.horizontal-pod-autoscaler-upscale-delay=1m \
+  --extra-config=controller-manager.horizontal-pod-autoscaler-downscale-delay=2m \
+  --extra-config=controller-manager.horizontal-pod-autoscaler-sync-period=10s
+
+kubectl apply -f web-api/deployment.yaml
+kubectl apply -f frontend/deployment.yaml
+
+kubectl autoscale deployment backend --cpu-percent=50 --min=1 --max=10
+kubectl autoscale deployment frontend --cpu-percent=50 --min=1 --max=10
