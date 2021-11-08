@@ -1,0 +1,14 @@
+version: "1"
+
+services:
+  loginAPI.producer:
+    image: cccontainerregistry1.azurecr.io/backend/backend:latest
+    build:
+      context: src
+      dockerfile: Dockerfile-loginAPIProducer
+
+  loginAPI.consumer:
+    image: cccontainerregistry1.azurecr.io/frontend/frontend:latest
+    build:
+      context: src
+      dockerfile: Dockerfile-loginAPIConsumer
