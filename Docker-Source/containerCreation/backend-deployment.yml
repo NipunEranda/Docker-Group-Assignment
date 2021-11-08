@@ -19,4 +19,4 @@ spec:
           ports:
             - containerPort: 9999
       imagePullSecrets:
-        - name: docker-secret
+        - name: docker-secret-1
