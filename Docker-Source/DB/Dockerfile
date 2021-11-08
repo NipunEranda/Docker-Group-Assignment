@@ -1,1 +1,2 @@
 FROM mysql
+FROM phpmyadmin
