@@ -5,7 +5,7 @@ metadata:
 spec:
   selector:
     matchLabels:
-      run: cccontainerregistry1.azurecr.io/frontend
+      run: frontend
   replicas: 1
   template:
     metadata:
@@ -13,7 +13,7 @@ spec:
         run: frontend
     spec:
       containers:
-      - name: cccontainerregistry1.azurecr.io/frontend
+      - name: frontend
         image: cccontainerregistry1.azurecr.io/frontend
         ports:
         - containerPort: 80
