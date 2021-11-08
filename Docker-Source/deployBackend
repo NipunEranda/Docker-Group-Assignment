@@ -1,5 +1,6 @@
 #!/bin/bash
 cd web-api
 mvn package
-sudo docker build -f src/main/docker/Dockerfile.jvm -t backend .
-sudo docker run -i -d --rm -p 9999:9999 --name backend backend
+az acr build --registry ccContainerRegistry1 --image backend:latest --file src/main/docker/Dockerfile.jvm .
+#sudo docker build -f src/main/docker/Dockerfile.jvm -t backend .
+#sudo docker run -i -d --rm -p 9999:9999 --name backend backend
