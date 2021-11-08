@@ -1,6 +1,6 @@
 /*DROP DATABASE IF EXISTS `user_db`;*/
 
-/*CREATE DATABASE IF NOT EXISTS `user_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;*/
+CREATE DATABASE IF NOT EXISTS `user_db` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `user_db`;
 
 CREATE TABLE usr_User (
@@ -324,3 +324,7 @@ INSERT INTO usr_Role (id, roleName, roleDesc, isActive) VALUES
     /*End Of User Management*/
 
   /*End Of Procedures*/
+
+sudo mysql -e "CREATE USER 'user' IDENTIFIED BY '1234';"
+sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;"
+sudo mysql -e "flush privileges;"
