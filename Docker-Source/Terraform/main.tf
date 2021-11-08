@@ -32,11 +32,6 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   }
 }
 
-resource "azurerm_resource_group" "rg" {
-  name     = "ccContainerRegistry1"
-  location = "East US"
-}
-
 resource "azurerm_container_registry" "acr" {
   name                = "ccContainerRegistry1"
   resource_group_name = azurerm_resource_group.rg.name
