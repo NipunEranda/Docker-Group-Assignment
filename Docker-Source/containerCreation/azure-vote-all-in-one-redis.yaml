@@ -1,0 +1,3 @@
+containers:
+- name: azure-vote-front
+  image: cccontainerregistry1.azurecr.io/frontend:latest
