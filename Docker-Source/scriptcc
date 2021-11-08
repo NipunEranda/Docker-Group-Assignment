@@ -90,3 +90,5 @@ eval $(minikube -p minikube docker-env)
 kubectl create -f frontend/deployment.yaml
 kubectl create -f backend/deployment.yaml
 kubectl create -f DB/deployment.yaml
+
+az acr build --registry ccContainerRegistry1 --image frontend:latest .
