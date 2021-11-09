@@ -8,8 +8,6 @@ spec:
   containers:
     - name: mysql
       image: cccontainerregistry1.azurecr.io/mysql:latest
-      volumeMounts:
-        - mountPath: "/var/lib/mysql"
       env:
         - name: MYSQL_DATABASE
           value: 'test'
