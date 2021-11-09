@@ -4,22 +4,22 @@ metadata:
   name: mysql-pod
   labels:
     app: mysql
-  spec:
-    containers:
-      - name: mysql
-        image: cccontainerregistry1.azurecr.io/mysql:latest
-        volumeMounts:
-          - mountPath: "/var/lib/mysql"
-        env:
-          - name: MYSQL_DATABASE
-            value: 'test'
-          - name: MYSQL_USER
-            value: 'directdevops'
-          - name: MYSQL_PASSWORD
-            value: 'directdevops'
-          - name: MYSQL_ROOT_PASSWORD
-            value: '1234'
-        ports:
-          - name: dbport
-            containerPort: 3306
-            protocol: TCP
+spec:
+  containers:
+    - name: mysql
+      image: cccontainerregistry1.azurecr.io/mysql:latest
+      volumeMounts:
+        - mountPath: "/var/lib/mysql"
+      env:
+        - name: MYSQL_DATABASE
+          value: 'test'
+        - name: MYSQL_USER
+          value: 'directdevops'
+        - name: MYSQL_PASSWORD
+          value: 'directdevops'
+        - name: MYSQL_ROOT_PASSWORD
+          value: '1234'
+      ports:
+        - name: dbport
+          containerPort: 3306
+          protocol: TCP
