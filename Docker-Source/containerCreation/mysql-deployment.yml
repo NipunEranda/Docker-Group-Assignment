@@ -6,8 +6,8 @@ spec:
   selector:
     app: mysql
   ports:
-  - port: 6606
-    targetPort: 80
+  - port: 3306
+    targetPort: 3306
   type: LoadBalancer
 
 ---
