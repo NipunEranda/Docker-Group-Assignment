@@ -84,10 +84,10 @@ function getUserDetails(id) {
             document.getElementById("email").innerHTML = loggedUser.email;
 
             if (userDetails.gender == "M") {
-                document.getElementById("profileImage").src = "../images/male.png"
+                document.getElementById("profileImage").src = "images/male.png"
                 document.getElementById("gender").innerHTML = "Male";
             } else {
-                document.getElementById("profileImage").src = "../images/female.png"
+                document.getElementById("profileImage").src = "images/female.png"
                 document.getElementById("gender").innerHTML = "Female";
             }
         },
