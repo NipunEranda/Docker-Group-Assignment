@@ -1,9 +1,9 @@
 #!/bin/bash
 cd DB
-az acr build --registry ccContainerRegistry1 --image mysql:latest --file docker-compose.yml .
+az acr build --registry ccContainerRegistry1 --image mysql:latest --file Dockerfile .
 
-cd ../phpmyadmin
-az acr build --registry ccContainerRegistry1 --image phpmyadmin:latest --file Dockerfile .
+#cd ../phpmyadmin
+#az acr build --registry ccContainerRegistry1 --image phpmyadmin:latest --file Dockerfile .
 #sudo docker run --name mysql-server -e MYSQL_ROOT_PASSWORD=1234 -e MYSQL_DATABASE=user_db --publish 3306:3306 -d mysql
 #sudo docker run --name phpmyadmin -d --link mysql-server:db -p 8080:80 phpmyadmin
 #sudo docker exec -i mysql-server mysql -uroot -p1234 mysql < DB/dbScript.sql
