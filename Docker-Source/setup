@@ -40,5 +40,7 @@ echo -e "\n${GREEN}Deploying All containers to the kubernetes cluster${NC}\n"
 
 cd containerCreation
 
+sleep 1m
+
 echo -e "\n${GREEN}Install databases${NC}\n"
 /bin/bash ./deployDatabase
