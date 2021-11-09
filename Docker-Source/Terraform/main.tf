@@ -6,8 +6,21 @@ terraform {
     }
   }
 }
+
+locals {
+ env_variables = {
+   DOCKER_REGISTRY_SERVER_URL            = "https://ccContainerRegistry1.azurecr.io"
+   DOCKER_REGISTRY_SERVER_USERNAME       = "0c2f4e50-746a-4535-b368-cae13522a34b"
+   DOCKER_REGISTRY_SERVER_PASSWORD       = "q0yg-Hknd4yPUtTn.6y.3e_Gp7gKqeJ0un"
+ }
+}
+
 provider "azurerm" {
   features {}
+}
+
+provider "azuread" {
+ version = "=2.8.0"
 }
 
 resource "azurerm_resource_group" "rg" {

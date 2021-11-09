@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: backend
+spec:
+  containers:
+  - name: backend
+    image: cccontainerregistry1.azurecr.io/ccContainerRegistry1/backend:latest
+  imagePullSecrets:
+  - name: docker-secret
+
