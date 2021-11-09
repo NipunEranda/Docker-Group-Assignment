@@ -2,8 +2,7 @@
 
 cd containerCreation
 
-kubectl apply -f backend-deployment.yaml --kubeconfig ../Terraform/kubeconfig
-kubectl apply -f frontend-deployment.yaml --kubeconfig ../Terraform/kubeconfig
 kubectl apply -f mysql-pv.yml --kubeconfig ../Terraform/kubeconfig
 kubectl apply -f mysql-deployment.yml --kubeconfig ../Terraform/kubeconfig
-kubectl apply -f ingress.yaml --kubeconfig ../Terraform/kubeconfig
+kubectl apply -f backend-deployment.yaml --kubeconfig ../Terraform/kubeconfig
+kubectl apply -f frontend-deployment.yaml --kubeconfig ../Terraform/kubeconfig
