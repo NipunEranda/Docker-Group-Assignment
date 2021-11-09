@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: cccontainerregistry1.azurecr.io/frontend/frontend:latest
+        image: cccontainerregistry1.azurecr.io/frontend:latest
         ports:
         - containerPort: 80
         resources:

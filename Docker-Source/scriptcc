@@ -2,6 +2,13 @@
 #login to azure
 az login
 
+sudo docker login ccContainerRegistry1.azurecr.io --username 0c2f4e50-746a-4535-b368-cae13522a34b --password q0yg-Hknd4yPUtTn.6y.3e_Gp7gKqeJ0un
+
+sudo cp /root/.docker/config.json ~/
+
+sudo chmod 777 ~/config.json
+
+kubectl create secret generic docker-secret-1 --type=kubernetes.io/dockerconfigjson --from-file .dockerconfigjson=/home/ubuntu/config.json --kubeconfig ../Terraform/kubeconfig
 
 #install kubectl
 az aks install-cli
