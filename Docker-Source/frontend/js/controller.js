@@ -1,4 +1,4 @@
-var API_URL = "http://10.0.100.101:8888/api/";
+var API_URL = "http://10.240.0.4:8888/api/";
 
 //User Login Function
 function userLogin(email, password) {

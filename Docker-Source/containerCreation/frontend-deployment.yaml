@@ -9,7 +9,6 @@ spec:
   - protocol: "TCP"
     port: 3000
     targetPort: 80
-  clusterIP: 10.0.100.102
   type: LoadBalancer
 
 ---
