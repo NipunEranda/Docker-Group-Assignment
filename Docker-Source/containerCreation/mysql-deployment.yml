@@ -1,17 +1,25 @@
-version: "3"
-kind: deployment
-services:
-  mysql_dev:
-    image: cccontainerregistry1.azurecr.io/mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-      MYSQL_DATABASE: user_db
-    ports:
-      - "3306:3306"
-
-  mysql-container:
-    image: cccontainerregistry1.azurecr.io/mysql:latest
-    environment:
-      MYSQL_ROOT_PASSWORD: 1234
-    ports:
-      - "3316:3306"
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysql-pod
+  labels:
+    app: mysql
+  spec:
+    containers:
+      - name: mysql
+        image: cccontainerregistry1.azurecr.io/mysql:latest
+        volumeMounts:
+          - mountPath: "/var/lib/mysql"
+        env:
+          - name: MYSQL_DATABASE
+            value: 'test'
+          - name: MYSQL_USER
+            value: 'directdevops'
+          - name: MYSQL_PASSWORD
+            value: 'directdevops'
+          - name: MYSQL_ROOT_PASSWORD
+            value: '1234'
+        ports:
+          - name: dbport
+            containerPort: 3306
+            protocol: TCP
