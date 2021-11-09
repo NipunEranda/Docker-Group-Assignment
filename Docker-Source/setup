@@ -14,6 +14,7 @@ sudo apt install azure-cli -y
 
 echo -e "\n${GREEN}Create Resource group, ACR and kubenetes cluster${NC}\n"
 
+cd Terraform
 terraform init
 terraform plan
 terraform apply
