@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd containerCreation
+
+kubectl apply -f backend-deployment.yaml --kubeconfig ../Terraform/kubeconfig
+kubectl apply -f frontend-deployment.yaml --kubeconfig ../Terraform/kubeconfig
+kubectl apply -f mysql-pv.yaml --kubeconfig ../Terraform/kubeconfig
+kubectl apply -f mysql-deployment.yaml --kubeconfig ../Terraform/kubeconfig

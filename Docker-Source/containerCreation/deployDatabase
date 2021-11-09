@@ -1,0 +1,2 @@
+#!/bin/bash
+kubectl exec -it mysql-76f88c55ff-6btmv -- mysql -uroot -p1234 mysql < dbScript.sql

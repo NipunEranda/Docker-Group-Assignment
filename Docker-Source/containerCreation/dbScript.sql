@@ -324,7 +324,3 @@ INSERT INTO usr_Role (id, roleName, roleDesc, isActive) VALUES
     /*End Of User Management*/
 
   /*End Of Procedures*/
-
-sudo mysql -e "CREATE USER 'user' IDENTIFIED BY '1234';"
-sudo mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'user'@'%' WITH GRANT OPTION;"
-sudo mysql -e "flush privileges;"
