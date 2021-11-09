@@ -1,7 +1,7 @@
 version: "3"
 services:
   phpmyadmin:
-    image: phpmyadmin/phpmyadmin
+    image: phpmyadmin:latest
     restart: unless-stopped
     environment:
       PMA_HOST: mysql_db
