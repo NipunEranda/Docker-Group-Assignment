@@ -34,3 +34,16 @@ spec:
   - port: 9999
   selector:
     run: backend
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backend
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 3000
+    targetPort: 9999
+  selector:
+    app: frontend
