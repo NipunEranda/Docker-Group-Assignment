@@ -44,3 +44,5 @@ sleep 1m
 
 echo -e "\n${GREEN}Install databases${NC}\n"
 /bin/bash ./deployDatabase
+
+echo "Done!"
