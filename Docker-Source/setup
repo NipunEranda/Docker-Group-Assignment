@@ -12,8 +12,10 @@ NC=`tput sgr0`
 echo -e "\n${GREEN}Installing Azure cli${NC}\n"
 sudo apt install azure-cli -y
 
-echo -e "\n${GREEN}Create Resource group, ACR and kubenetes cluster${NC}\n"
+echo -e "\n${GREEN}Login to azure cli${NC}\n"
+az login
 
+echo -e "\n${GREEN}Create Resource group, ACR and kubenetes cluster${NC}\n"
 cd Terraform
 terraform init
 terraform plan
