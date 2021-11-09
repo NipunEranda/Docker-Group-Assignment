@@ -3,11 +3,20 @@ RED=`tput setaf 1`
 GREEN=`tput setaf 2`
 NC=`tput sgr0`
 
-echo -e "\n${GREEN}Installing OpenJDK 11${NC}\n"
-sudo apt install openjdk-11-jdk openjdk-11-jre
+#echo -e "\n${GREEN}Installing OpenJDK 11${NC}\n"
+#sudo apt install openjdk-11-jdk openjdk-11-jre
 
-echo -e "\n${GREEN}Installing Maven${NC}\n"
-sudo apt install maven
+#echo -e "\n${GREEN}Installing Maven${NC}\n"
+#sudo apt install maven
+
+echo -e "\n${GREEN}Installing Azure cli${NC}\n"
+sudo apt install azure-cli -y
+
+echo -e "\n${GREEN}Create Resource group, ACR and kubenetes cluster${NC}\n"
+
+terraform init
+terraform plan
+terraform apply
 
 echo -e "\n${GREEN}Deploying Backend  Server${NC}\n"
 /bin/bash ./deployBackend
@@ -17,6 +26,3 @@ echo -e "\n${GREEN}Deploying Frontend Server${NC}\n"
 
 echo -e "\n${GREEN}Deploying Database${NC}\n"
 /bin/bash ./deployDB
-
-echo -e "\n${GREEN}Enable Auto scaling${NC}\n"
-/bin/bash ./autoScale
