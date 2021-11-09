@@ -10,11 +10,12 @@ spec:
   template:
     metadata:
       labels:
-        run: frontend
+        app: frontend
     spec:
       containers:
       - name: frontend
         image: cccontainerregistry1.azurecr.io/frontend:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
         resources:
@@ -22,20 +23,9 @@ spec:
             cpu: 500m
           requests:
             cpu: 200m
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: frontend
-  labels:
-    run: frontend
-spec:
-  ports:
-  - port: 80
-  selector:
-    run: frontend
 
 ---
+
 apiVersion: v1
 kind: Service
 metadata:
@@ -43,7 +33,8 @@ metadata:
 spec:
   type: LoadBalancer
   ports:
-  - port: 80
-    targetPort: 8080
+  - protocol: "TCP"
+  - port: 3000
+    targetPort: 80
   selector:
     app: frontend
