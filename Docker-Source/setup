@@ -22,6 +22,8 @@ terraform apply
 sudo cp kubeconfig ~/.kube/config
 sudo chown $(id -u):$(id -g) ~/.kube/config
 
+cd ..
+
 echo -e "\n${GREEN}Deploying Backend  Server${NC}\n"
 /bin/bash ./deployBackend
 
@@ -32,4 +34,9 @@ echo -e "\n${GREEN}Deploying Database${NC}\n"
 /bin/bash ./deployDB
 
 echo -e "\n${GREEN}Deploying All containers to the kubernetes cluster${NC}\n"
-/bin/bash ./deployDB
+/bin/bash ./deployAllImages
+
+cd containerCreation
+
+echo -e "\n${GREEN}Install databases${NC}\n"
+/bin/bash ./deployDatabase
