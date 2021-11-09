@@ -1,6 +1,6 @@
 #!/bin/bash
 cd DB
-az acr build --registry ccContainerRegistry1 --image mysql:latest --file Dockerfile .
+az acr build --registry ccContainerRegistry1 --image mysql:latest .
 
 #cd ../phpmyadmin
 #az acr build --registry ccContainerRegistry1 --image phpmyadmin:latest --file Dockerfile .
