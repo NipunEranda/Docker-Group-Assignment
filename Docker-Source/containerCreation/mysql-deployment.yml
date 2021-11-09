@@ -3,10 +3,12 @@ kind: Service
 metadata:
   name: mysql
 spec:
-  ports:
-    - port: 3306
   selector:
     app: mysql
+  ports:
+  - port: 6606
+    targetPort: 80
+  type: LoadBalancer
 
 ---
 apiVersion: apps/v1
