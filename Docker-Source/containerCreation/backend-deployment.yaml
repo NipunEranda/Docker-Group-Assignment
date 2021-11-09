@@ -6,7 +6,7 @@ spec:
   selector:
     app: backend-app
   ports:
-    port: 9999
+    port: 8888
     targetPort: 9999
   type: LoadBalancer
 
