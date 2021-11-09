@@ -19,6 +19,9 @@ terraform init
 terraform plan
 terraform apply
 
+sudo cp kubeconfig ~/.kube/config
+sudo chown $(id -u):$(id -g) ~/.kube/config
+
 echo -e "\n${GREEN}Deploying Backend  Server${NC}\n"
 /bin/bash ./deployBackend
 
