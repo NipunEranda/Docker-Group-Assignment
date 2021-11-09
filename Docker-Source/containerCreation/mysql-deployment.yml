@@ -1,23 +1,76 @@
 apiVersion: v1
-kind: Pod
+kind: Service
 metadata:
-  name: mysql-pod
-  labels:
-    app: mysql
+  name: mysql
 spec:
-  containers:
-    - name: mysql
-      image: cccontainerregistry1.azurecr.io/mysql:latest
-      env:
-        - name: MYSQL_DATABASE
-          value: 'test'
-        - name: MYSQL_USER
-          value: 'directdevops'
-        - name: MYSQL_PASSWORD
-          value: 'directdevops'
-        - name: MYSQL_ROOT_PASSWORD
-          value: '1234'
-      ports:
-        - name: dbport
-          containerPort: 3306
-          protocol: TCP
+  ports:
+  - port: 3306
+  selector:
+    app: mysql
+  clusterIP: None
+
+---
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec:
+  selector:
+    matchLabels:
+      app: mysql
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: mysql:5.6
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: 1234
+        ports:
+        - containerPort: 3306
+          name: mysql
+        volumeMounts:
+        - name: mysql-persistent-storage
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-persistent-storage
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-pv-volume
+  labels:
+    type: local
+spec:
+  storageClassName: manual
+  capacity:
+    storage: 20Gi
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/mnt/data"
+
+---
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-pv-claim
+spec:
+  storageClassName: manual
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+
