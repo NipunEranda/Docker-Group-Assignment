@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: backend
-    image: cccontainerregistry1.azurecr.io/ccContainerRegistry1/backend:latest
+    image: cccontainerregistry1.azurecr.io/backend:latest
   imagePullSecrets:
   - name: docker-secret
 
