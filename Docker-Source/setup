@@ -17,7 +17,7 @@ echo -e "\n${GREEN}Create Resource group, ACR and kubenetes cluster${NC}\n"
 cd Terraform
 terraform init
 terraform plan
-terraform apply
+terraform apply -auto-approve
 
 sudo cp kubeconfig ~/.kube/config
 sudo chown $(id -u):$(id -g) ~/.kube/config
