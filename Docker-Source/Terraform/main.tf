@@ -28,11 +28,22 @@ resource "azurerm_resource_group" "rg" {
   location = "eastus"
 }
 
+resource "azurerm_container_registry" "acr" {
+  name                = "ccContainerRegistry1"
+  resource_group_name = azurerm_resource_group.rg.name
+  location            = azurerm_resource_group.rg.location
+  sku                 = "Basic"
+  admin_enabled       = true
+}
+
 resource "azurerm_kubernetes_cluster" "cluster" {
   name                = "cc-cluster"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
   dns_prefix          = "cc"
+
+  enable_attach_acr = true
+  acr_id            = azurerm_container_registry.acr.id
 
   default_node_pool {
     name       = "default"
@@ -43,12 +54,4 @@ resource "azurerm_kubernetes_cluster" "cluster" {
   identity {
     type = "SystemAssigned"
   }
-}
-
-resource "azurerm_container_registry" "acr" {
-  name                = "ccContainerRegistry1"
-  resource_group_name = azurerm_resource_group.rg.name
-  location            = azurerm_resource_group.rg.location
-  sku                 = "Basic"
-  admin_enabled       = true
 }
