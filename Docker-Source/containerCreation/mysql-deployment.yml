@@ -4,10 +4,10 @@ metadata:
   name: mysql-service
 spec:
   selector:
-    app: mysql
+    app: mysql-app
   ports:
   - protocol: "TCP"
-    port: 7777
+    port: 6606
     targetPort: 3306
   type: LoadBalancer
 
@@ -16,34 +16,20 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: mysql
+  name: mysql-app
 spec:
-  strategy:
-    rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 1
-    type: RollingUpdate
-  replicas: 1
   selector:
     matchLabels:
-      app: mysql  
+      app: mysql-app
+  replicas: 1
   template:
     metadata:
       labels:
-        app: mysql
+        app: mysql-app
     spec:
-      schedulerName: stork
       containers:
-      - name: mysql
-        image: mysql:5.6
-        imagePullPolicy: "Always"
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: 1234        
+      - name: mysql-app
+        image: cccontainerregistry1.azurecr.io/mysql:latest
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 3306
-        volumeMounts:
-        - mountPath: /var/lib/mysql
-          name: mysql-data
-      volumes:
-      - name: mysql-data
