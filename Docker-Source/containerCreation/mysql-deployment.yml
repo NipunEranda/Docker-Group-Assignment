@@ -1,4 +1,5 @@
 version: "3"
+kind: deployment
 services:
   mysql_dev:
     image: cccontainerregistry1.azurecr.io/mysql:latest
